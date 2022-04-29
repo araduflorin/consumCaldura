@@ -16,8 +16,7 @@
             </h2>
             <div class="col-fluid">
                 <table id="table" class="table table-dark table-striped table-sm">
-                        <tr>
-                            <th>ID</th>
+                        <tr>                            
                             <th>Sufragerie</th>
                             <th>Bucatarie</th>
                             <th>Dormitor mic</th>
@@ -25,11 +24,12 @@
                             <th>Baie</th>
                             <th>WC serviciu</th>
                             <th>Data</th>
+                            <th>Actiune</th>
                         </tr>     
                     <tbody>
                         {% for c in inreg %}
                             <tr>
-                                <td>{{c.id}}</td>
+                                <!--<td>{{c.id}}</td>-->
                                 <td>{{c.Sufragerie}}</td>
                                 <td>{{c.Bucatarie}}</td>
                                 <td>{{c.DormitorMic}}</td>
