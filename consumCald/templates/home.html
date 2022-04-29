@@ -11,7 +11,7 @@
     <div class="container">        
         <div class="jumbotron p-3">
             <h2>Introducere <b>Consumuri </b> 
-                <button type="button"  class="btn btn-success float-right" style="padding: 5px 19px;" data-toggle="modal" data-target="#modalAdaugConsum">Adauga consum caldura</button>
+                <button type="button"  class="btn btn-success float-right" style="padding: 5px 19px;" data-toggle="modal" data-target="#modalAdaug">Adauga consum caldura</button>
                 <br>               
             </h2>
             <div class="col-fluid">
@@ -24,12 +24,145 @@
                             <th>Dormitor mare</th>
                             <th>Baie</th>
                             <th>WC serviciu</th>
+                            <th>Data</th>
                         </tr>     
                     <tbody>
-                        
+                        {% for c in inreg %}
+                            <tr>
+                                <td>{{c.id}}</td>
+                                <td>{{c.Sufragerie}}</td>
+                                <td>{{c.Bucatarie}}</td>
+                                <td>{{c.DormitorMic}}</td>
+                                <td>{{c.DormitorMare}}</td>
+                                <td>{{c.Baie}}</td>
+                                <td>{{c.WC}}</td>
+                                <td>{{c.Data}}</td>
+                                <td>
+                                    <a href="/modificaCald/{{c.id}}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modaleditCald{{c.id}}">Modifica</a>
+                                                 
+                                </td>  
+                            </tr>
+
+                            <div id="modaleditCald{{c.id}}" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                
+                                            <h4 class="modal-title">Modifica consum</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                
+                                                <form action="{{url_for('modificaCald')}}" method="POST">                                  
+                                    
+                                                    <div class="form-group">                                  
+                                                    <label>Consum sufragerie:</label>
+                                                    <input type="hidden" name="id" value="{{c.id}}">
+                                                    <input type="number" class="form-control" name="sufragerie" value="{{c.Sufragerie}}">                                                   
+                                                    </div>
+                                    
+                                                    <div class="form-group">                                                                                    
+                                                    <label>Consum bucatarie:</label>
+                                                    <input type="number" class="form-control" name="bucatarie" value="{{c.Bucatarie}}">                                               
+                                                    </div>
+                                                                        
+                                                    <div class="form-group">                             
+                                                    <label>Consum dormitor mic</label>
+                                                    <input type="number" class="form-control" name="dormitorMic" value="{{c.DormitorMic}}">                              
+                                                    </div>
+
+                                                    <div class="form-group">                             
+                                                    <label>Consum dormitor mare</label>
+                                                    <input type="number" class="form-control" name="dormitorMare" value="{{c.DormitorMare}}">                              
+                                                    </div>
+
+                                                    <div class="form-group">                             
+                                                    <label>Consum baie</label>
+                                                    <input type="number" class="form-control" name="baie" value="{{c.Baie}}">                              
+                                                    </div>
+
+                                                    <div class="form-group">                             
+                                                    <label>Consum WC</label>
+                                                    <input type="number" class="form-control" name="wc" value="{{c.WC}}">                              
+                                                    </div>
+                                                                                                        
+                                                    <div class="form-group">                                 
+                                                        <button class="btn btn-primary" type="submit">Modifica</button>                                 
+                                                    </div>
+                                    
+                                                </form>                                  
+                                
+                                        </div>
+                                                                    
+                                        <div class="modal-footer">                                 
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+                                        </div>                                                                    
+                                    </div>                                                                    
+                                </div>
+                            </div>
+                        {%  endfor %}
                     </tbody>               
                 </table>
             </div>
+            <!-- Modal adaugare consum -->
+            <div id="modalAdaug" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                   <div class="modal-content">
+                      <div class="modal-header">
+              
+                         <h4 class="modal-title">Adauga consum caldura</h4>
+                      </div>
+                      <div class="modal-body">
+              
+                            <form action="{{url_for('adaugaCald')}}" method="POST">                                  
+                
+                                <div class="form-group">                                  
+                                <label>Consum sufragerie:</label>
+                                <input type="number" class="form-control" name="sufragerie" required="1">                                                   
+                                </div>
+                
+                                <div class="form-group">                                                                                    
+                                <label>Consum bucatarie:</label>
+                                <input type="number" class="form-control" name="bucatarie" required="1">                                               
+                                </div>
+                                                    
+                                <div class="form-group">                             
+                                <label>Consum dormitor mic:</label>
+                                <input type="number" class="form-control" name="dormitorMic" required="1">                              
+                                </div>
+
+                                <div class="form-group">                             
+                                <label>Consum dormitor mare:</label>
+                                <input type="number" class="form-control" name="dormitorMare" required="1">                              
+                                </div>
+                                           
+                                <div class="form-group">                             
+                                <label>Consum baie:</label>
+                                <input type="number" class="form-control" name="baie" required="1">                              
+                                </div>
+
+                                <div class="form-group">                             
+                                <label>Consum WC:</label>
+                                <input type="number" class="form-control" name="wc" required="1">                              
+                                </div>
+
+                                <div class="form-group">                                 
+                                    <button class="btn btn-primary" type="submit">Adauga</button>                                 
+                                </div>
+                
+                            </form>                                  
+              
+                      </div>
+                                                
+                      <div class="modal-footer">                                 
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+                      </div>
+                                                
+                   </div>
+                                                
+                </div>
+                                                
+             </div>
+
         </div>        
     </div>
 </div>
